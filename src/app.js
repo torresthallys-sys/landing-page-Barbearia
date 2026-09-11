@@ -102,6 +102,7 @@ export async function createApp(root) {
       <section class="hero" id="inicio">
         <video class="hero-bg" data-speed="0.28" autoplay muted loop playsinline aria-hidden="true">
           <source src="/video/capa-barbearia.mp4/Transforme_esta_imagem_em_um_v.mp4" type="video/mp4" />
+
         </video>
         <div class="hero-overlay"></div>
         <div class="hero-frame"></div>
