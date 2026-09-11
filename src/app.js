@@ -105,7 +105,7 @@ export async function createApp(root) {
 
         </video>
         <div class="hero-overlay"></div>
-        <div class="hero-frame"></div>
+        <div class="hero-frame"></div>"
         <div class="hero-content reveal">
           <p class="eyebrow">Aparecida de Goiania</p>
           <h1>Vila do Cavaleiro<span>Barbearia</span></h1>
@@ -509,6 +509,15 @@ export async function createApp(root) {
   }
 
   root.innerHTML = page();
-  renderBooking();
-  bindChrome();
+
+const video = document.querySelector(".hero-bg");
+
+if (video) {
+  video.muted = true;
+  video.playsInline = true;
+  video.play().catch(() => {});
+}
+
+renderBooking();
+bindChrome();
 }
