@@ -162,6 +162,15 @@ textarea {
   transform: translate3d(0, 0, 0);
   will-change: transform;
   z-index: -2;
+  pointer-events: none;
+}
+
+.hero-bg::-webkit-media-controls,
+.hero-bg::-webkit-media-controls-start-playback-button,
+.hero-bg::-webkit-media-controls-enclosure {
+  display: none !important;
+  -webkit-appearance: none;
+  opacity: 0 !important;
 }
 
 .hero-overlay {

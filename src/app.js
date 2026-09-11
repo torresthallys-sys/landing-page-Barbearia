@@ -100,9 +100,8 @@ export async function createApp(root) {
       <div class="noise"></div>
       ${nav()}
       <section class="hero" id="inicio">
-        <video class="hero-bg" data-speed="0.28" autoplay muted loop playsinline aria-hidden="true">
+        <video class="hero-bg" data-speed="0.28" autoplay muted loop playsinline webkit-playsinline preload="auto" aria-hidden="true">
           <source src="/video/capa-barbearia.mp4/Transforme_esta_imagem_em_um_v.mp4" type="video/mp4" />
-
         </video>
         <div class="hero-overlay"></div>
         <div class="hero-frame"></div>"
@@ -510,13 +509,39 @@ export async function createApp(root) {
 
   root.innerHTML = page();
 
-const video = document.querySelector(".hero-bg");
+  const video = root.querySelector(".hero-bg");
+  if (video) {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
 
-if (video) {
-  video.muted = true;
-  video.playsInline = true;
-  video.play().catch(() => {});
-}
+    const playVideo = () => {
+      if (video.paused) {
+        const promise = video.play();
+        if (promise !== undefined) {
+          promise.catch(() => {
+            // Autoplay bloqueado pelo SO/navegador (ex: Low Power Mode)
+          });
+        }
+      }
+    };
+
+    playVideo();
+    video.addEventListener("loadeddata", playVideo, { once: true });
+    video.addEventListener("canplay", playVideo, { once: true });
+
+    const unlockOnGesture = () => {
+      playVideo();
+      if (!video.paused) {
+        ["touchstart", "pointerdown", "scroll"].forEach((evt) => {
+          window.removeEventListener(evt, unlockOnGesture);
+        });
+      }
+    };
+    ["touchstart", "pointerdown", "scroll"].forEach((evt) => {
+      window.addEventListener(evt, unlockOnGesture, { once: true, passive: true });
+    });
+  }
 
 renderBooking();
 bindChrome();
