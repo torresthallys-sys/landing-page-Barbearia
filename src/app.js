@@ -83,6 +83,7 @@ export async function createApp(root) {
           <li><a href="#inicio">Início</a></li>
           <li><a href="#sobre">Sobre</a></li>
           <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#equipe">Equipe</a></li>
           <li><a href="#galeria">Galeria</a></li>
           <li><a href="#avaliacoes">Avaliações</a></li>
           <li><a href="#agendamento">Agendamento</a></li>
@@ -100,11 +101,11 @@ export async function createApp(root) {
       <div class="noise"></div>
       ${nav()}
       <section class="hero" id="inicio">
-        <video class="hero-bg" data-speed="0.28" autoplay muted loop playsinline webkit-playsinline preload="auto" aria-hidden="true">
-          <source src="/video/capa-barbearia.mp4/Transforme_esta_imagem_em_um_v.mp4" type="video/mp4" />
+        <video class="hero-bg" data-speed="0.28" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="/img/hero-poster.jpg" aria-hidden="true">
+          <source src="/video/capa-hero.mp4" type="video/mp4" />
         </video>
         <div class="hero-overlay"></div>
-        <div class="hero-frame"></div>"
+        <div class="hero-frame"></div>
         <div class="hero-content reveal">
           <p class="eyebrow">Aparecida de Goiania</p>
           <h1>Vila do Cavaleiro<span>Barbearia</span></h1>
@@ -115,18 +116,18 @@ export async function createApp(root) {
       </section>
 
       <section class="about" id="sobre">
-        <div class="about-photo reveal">
-          <img src="/images/ambiente.png" alt="Exterior da Vila do Cavaleiro Barbearia" />
+        <div class="about-photo reveal-on-scroll">
+          <img src="/img/ambiente.png" alt="Ambiente exclusivo da Vila do Cavaleiro Barbearia" loading="lazy" />
         </div>
-        <div>
+        <div class="about-info reveal-on-scroll" style="--reveal-delay: 0.15s">
           <p class="eyebrow">A casa</p>
-          <h2>Tradicao, navalha e presenca</h2>
+          <h2>Tradição, navalha e presença</h2>
           <div class="gold-rule"></div>
           <p>Na Vila do Cavaleiro cada corte é uma cerimônia. Um espaço masculino, silencioso o bastante para o detalhe, intenso o bastante para o estilo.</p>
           <p>Em Aparecida de Goiânia, o mestre barbeiro Heryque e a equipe recebem quem busca um visual limpo, clássico ou contemporâneo — sempre com acabamento de cavaleiro.</p>
           <div class="stats">
-            <div class="stat"><strong>5,0</strong><span>Avaliacao</span></div>
-            <div class="stat"><strong>7</strong><span>Avaliacoes</span></div>
+            <div class="stat"><strong>5,0</strong><span>Avaliação</span></div>
+            <div class="stat"><strong>7</strong><span>Avaliações</span></div>
             <div class="stat"><strong>GO</strong><span>Aparecida</span></div>
           </div>
         </div>
@@ -134,26 +135,28 @@ export async function createApp(root) {
 
       <section class="highlight">
         <div class="highlight-bg" data-speed="0.42"></div>
-        <div class="highlight-copy">
+        <div class="highlight-copy reveal-on-scroll">
           <p class="eyebrow">Manifesto</p>
           <h2>O homem se reconhece no corte.</h2>
           <div class="gold-rule" style="margin-left:auto;margin-right:auto"></div>
-          <p style="color:var(--muted)">Tesoura, maquina e navalha. Ritmo, silencio e ouro sobre grafite.</p>
+          <p style="color:var(--muted)">Tesoura, máquina e navalha. Ritmo, silêncio e ouro sobre grafite.</p>
         </div>
       </section>
 
       <section class="services" id="servicos">
-        <div class="section-head">
-          <p class="eyebrow">Oficio</p>
+        <div class="section-head reveal-on-scroll">
+          <p class="eyebrow">Ofício</p>
           <h2>Serviços</h2>
           <div class="gold-rule"></div>
         </div>
         <div class="service-grid">
           ${data.services
             .map(
-              (s) => `
-            <article class="card">
-              <img src="${s.image}" alt="${s.name}" />
+              (s, idx) => `
+            <article class="card reveal-on-scroll" style="--reveal-delay: ${idx * 0.12}s">
+              <div class="card-img-wrap">
+                <img src="${s.image}" alt="${s.name}" loading="lazy" />
+              </div>
               <div class="card-body">
                 <h3>${s.name}</h3>
                 <p>${s.description}</p>
@@ -165,25 +168,51 @@ export async function createApp(root) {
         </div>
       </section>
 
+      <section class="team" id="equipe">
+        <div class="section-head reveal-on-scroll">
+          <p class="eyebrow">Especialistas</p>
+          <h2>Mestres Barbeiros</h2>
+          <div class="gold-rule"></div>
+        </div>
+        <div class="team-grid">
+          ${data.barbers
+            .map(
+              (b, idx) => `
+            <article class="card team-card reveal-on-scroll" style="--reveal-delay: ${idx * 0.15}s">
+              <div class="team-img-wrap">
+                <img src="${b.image}" alt="${b.name} - ${b.role}" loading="lazy" />
+                <span class="team-badge">${b.role}</span>
+              </div>
+              <div class="card-body">
+                <h3>${b.name}</h3>
+                <p>${b.bio}</p>
+                <a class="btn ghost btn-sm" href="#agendamento" data-pick-barber="${b.id}">Agendar com ${b.name}</a>
+              </div>
+            </article>`
+            )
+            .join("")}
+        </div>
+      </section>
+
       <section class="gallery" id="galeria">
-        <div class="section-head">
-          <p class="eyebrow">Atelie</p>
+        <div class="section-head reveal-on-scroll">
+          <p class="eyebrow">Ateliê</p>
           <h2>Galeria</h2>
           <div class="gold-rule"></div>
         </div>
         <div class="gallery-grid">
           ${[
-            ["Captura%20de%20tela%202026-09-06%20225648.png", "Corte classico"],
-            ["Captura%20de%20tela%202026-09-06%20225704.png", "Degrade"],
-            ["Captura%20de%20tela%202026-09-06%20225721.png", "Navalha"],
-            ["Captura%20de%20tela%202026-09-06%20225730.png", "Social"],
-            ["Captura%20de%20tela%202026-09-06%20225739.png", "Detalhe"],
-            ["ambiete.png", "Ambiente"]
+            ["/img/galeria-fade.jpg", "Degradê de Alta Precisão"],
+            ["/img/galeria-barba.jpg", "Barba Alinhada & Visagismo"],
+            ["/img/galeria-navalha.jpg", "Toalha Quente & Navalha"],
+            ["/img/galeria-classico.jpg", "Corte Social & Pompadour"],
+            ["/img/galeria-whisky.jpg", "Lounge & Conforto"],
+            ["/img/galeria-detalhes.jpg", "Cutelaria & Ofício"]
           ]
             .map(
-              ([src, cap]) => `
-            <figure>
-              <img src="/images/${src}" alt="${cap}" />
+              ([src, cap], idx) => `
+            <figure class="reveal-on-scroll" style="--reveal-delay: ${idx * 0.08}s">
+              <img src="${src}" alt="${cap}" loading="lazy" />
               <figcaption>${cap}</figcaption>
             </figure>`
             )
@@ -192,12 +221,12 @@ export async function createApp(root) {
       </section>
 
       <section class="reviews" id="avaliacoes">
-        <div class="section-head">
+        <div class="section-head reveal-on-scroll">
           <p class="eyebrow">Voz da casa</p>
           <h2>Avaliações</h2>
           <div class="gold-rule"></div>
         </div>
-        <div class="rating-hero">
+        <div class="rating-hero reveal-on-scroll">
           <div class="score">5,0</div>
           <div>
             <div class="stars">${stars()}</div>
@@ -207,8 +236,8 @@ export async function createApp(root) {
         <div class="review-grid">
           ${data.reviews
             .map(
-              (r) => `
-            <article class="review">
+              (r, idx) => `
+            <article class="review reveal-on-scroll" style="--reveal-delay: ${idx * 0.08}s">
               <header><strong>${r.name}</strong><span>${stars()}</span></header>
               <p>${r.text}</p>
             </article>`
@@ -218,12 +247,12 @@ export async function createApp(root) {
       </section>
 
       <section class="booking" id="agendamento">
-        <div class="section-head">
+        <div class="section-head reveal-on-scroll">
           <p class="eyebrow">Reserva</p>
           <h2>Agendamento</h2>
           <div class="gold-rule"></div>
         </div>
-        <div class="booking-wrap">
+        <div class="booking-wrap reveal-on-scroll" style="--reveal-delay: 0.1s">
           <div class="wizard" id="wizard"></div>
           <aside class="aside-card">
             <h3>Como funciona</h3>
@@ -240,13 +269,13 @@ export async function createApp(root) {
       </section>
 
       <section class="contact" id="contato">
-        <div class="section-head">
-          <p class="eyebrow">Presenca</p>
+        <div class="section-head reveal-on-scroll">
+          <p class="eyebrow">Presença</p>
           <h2>Contato</h2>
           <div class="gold-rule"></div>
         </div>
         <div class="contact-grid">
-          <div class="info-list">
+          <div class="info-list reveal-on-scroll">
             <div>
               <h3>Telefone</h3>
               <p><a href="tel:+5562994219965">${shop.phone}</a></p>
@@ -256,16 +285,16 @@ export async function createApp(root) {
               <p><a href="https://instagram.com/${shop.instagram}" target="_blank" rel="noreferrer">@${shop.instagram}</a></p>
             </div>
             <div>
-              <h3>Endereco</h3>
+              <h3>Endereço</h3>
               <p>${shop.address}</p>
             </div>
             <div>
-              <h3>Avaliacao</h3>
-              <p>5,0 ${stars()} · ${shop.reviewCount} avaliacoes</p>
+              <h3>Avaliação</h3>
+              <p>5,0 ${stars()} · ${shop.reviewCount} avaliações</p>
             </div>
-            <a class="btn" href="https://wa.me/${shop.whatsapp}?text=${encodeURIComponent("Ola, quero agendar na Vila do Cavaleiro.")}" target="_blank" rel="noreferrer">WhatsApp</a>
+            <a class="btn" href="https://wa.me/${shop.whatsapp}?text=${encodeURIComponent("Olá, quero agendar na Vila do Cavaleiro.")}" target="_blank" rel="noreferrer">WhatsApp</a>
           </div>
-          <div class="map-frame">
+          <div class="map-frame reveal-on-scroll" style="--reveal-delay: 0.15s">
             <iframe title="Mapa da barbearia" src="${maps}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
@@ -505,6 +534,43 @@ export async function createApp(root) {
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+
+    document.querySelectorAll("[data-pick-barber]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-pick-barber");
+        if (id) {
+          state.barberId = id;
+          renderBooking();
+        }
+      });
+    });
+
+    initScrollReveals();
+  }
+
+  function initScrollReveals() {
+    const reveals = document.querySelectorAll(".reveal-on-scroll");
+    if (!("IntersectionObserver" in window)) {
+      reveals.forEach((el) => el.classList.add("is-revealed"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-revealed");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        rootMargin: "0px 0px -40px 0px",
+        threshold: 0.1
+      }
+    );
+
+    reveals.forEach((el) => observer.observe(el));
   }
 
   root.innerHTML = page();

@@ -15,7 +15,7 @@ const fallback = {
       duration: 30,
       price: 45,
       description: "Corte moderno alinhado ao seu estilo, com finalizacao precisa.",
-      image: "/images/Captura%20de%20tela%202026-09-06%20225951.png"
+      image: "/img/corte.png"
     },
     {
       id: "navalha",
@@ -23,7 +23,7 @@ const fallback = {
       duration: 60,
       price: 60,
       description: "Acabamento classico na navalha, contornos nitidos e visual premium.",
-      image: "/images/Captura%20de%20tela%202026-09-06%20225704.png"
+      image: "/img/navalha.png"
     },
     {
       id: "social",
@@ -31,7 +31,7 @@ const fallback = {
       duration: 30,
       price: 40,
       description: "Corte limpo e elegante para o dia a dia, reunioes e ocasioes.",
-      image: "/images/Captura%20de%20tela%202026-09-06%20225739.png"
+      image: "/img/social.png"
     }
   ],
   barbers: [
@@ -40,14 +40,14 @@ const fallback = {
       name: "Heryque",
       role: "Mestre barbeiro",
       bio: "Frente da Vila do Cavaleiro. Tecnica, estilo e atendimento de casa.",
-      image: "/images/Captura%20de%20tela%202026-09-06%20225750.png"
+      image: "/img/heryque.png"
     },
     {
       id: "rafael",
       name: "Rafael",
       role: "Barbeiro",
       bio: "Cortes sociais e degradas com acabamento alinhado ao padrao da casa.",
-      image: "/images/Captura%20de%20tela%202026-09-06%20225839.png"
+      image: "/img/rafael.png"
     }
   ],
   reviews: [
@@ -62,14 +62,14 @@ const fallback = {
 };
 
 const serviceImages = {
-  corte: "/images/Captura%20de%20tela%202026-09-06%20225951.png",
-  navalha: "/images/Captura%20de%20tela%202026-09-06%20225704.png",
-  social: "/images/Captura%20de%20tela%202026-09-06%20225739.png"
+  corte: "/img/corte.png",
+  navalha: "/img/navalha.png",
+  social: "/img/social.png"
 };
 
 const barberImages = {
-  heryque: "/images/Captura%20de%20tela%202026-09-06%20225750.png",
-  rafael: "/images/Captura%20de%20tela%202026-09-06%20225839.png"
+  heryque: "/img/heryque.png",
+  rafael: "/img/rafael.png"
 };
 
 function addMissingImages(items, images) {

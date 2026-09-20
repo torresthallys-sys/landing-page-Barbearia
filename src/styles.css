@@ -265,12 +265,22 @@ textarea {
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.25s;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.15s ease;
 }
 
 .btn:hover {
   background: transparent;
   color: var(--gold);
+  box-shadow: 0 0 24px rgba(201, 162, 39, 0.28);
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.98);
 }
 
 .btn.ghost {
@@ -281,11 +291,14 @@ textarea {
 .btn.ghost:hover {
   background: var(--gold);
   color: var(--black);
+  box-shadow: 0 0 24px rgba(201, 162, 39, 0.35);
 }
 
 .btn:disabled {
   opacity: 0.45;
   cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
 .scroll-hint {
@@ -404,8 +417,8 @@ section {
   position: absolute;
   inset: -18%;
   background:
-    linear-gradient(90deg, rgba(7, 7, 7, 0.82), rgba(7, 7, 7, 0.35) 40%, rgba(7, 7, 7, 0.85)),
-    url("/images/ambiete.png") center/cover no-repeat;
+    linear-gradient(90deg, rgba(7, 7, 7, 0.85), rgba(7, 7, 7, 0.4) 40%, rgba(7, 7, 7, 0.88)),
+    url("/img/ambiente.png") center/cover no-repeat;
   will-change: transform;
 }
 
@@ -437,25 +450,35 @@ section {
   background: var(--black);
   border: 1px solid var(--line);
   overflow: hidden;
-  transition: transform 0.35s, border-color 0.35s;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
   border-color: var(--gold);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(201, 162, 39, 0.12);
+}
+
+.card .card-img-wrap {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  background: #111;
 }
 
 .card img {
   width: 100%;
-  height: 220px;
+  height: 100%;
   object-fit: cover;
-  filter: grayscale(25%);
-  transition: 0.4s;
+  filter: grayscale(18%) contrast(1.04);
+  transition: filter 0.4s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card:hover img {
   filter: grayscale(0%);
-  transform: scale(1.04);
+  transform: scale(1.05);
 }
 
 .card-body {
@@ -484,48 +507,118 @@ section {
   letter-spacing: 0.08em;
 }
 
+/* Equipe / Team */
+.team {
+  background: #0d0d0d;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  max-width: 900px;
+}
+
+.team-card .team-img-wrap {
+  position: relative;
+  height: 420px;
+  overflow: hidden;
+  background: #111;
+}
+
+.team-card .team-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  filter: grayscale(15%) contrast(1.05);
+  transition: filter 0.45s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.team-card:hover .team-img-wrap img {
+  filter: grayscale(0%);
+  transform: scale(1.04);
+}
+
+.team-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(7, 7, 7, 0.88);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 5px 14px;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.btn-sm {
+  padding: 10px 20px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  margin-top: 14px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
 .gallery {
   background: var(--black);
 }
 
 .gallery-grid {
   columns: 3;
-  column-gap: 16px;
+  column-gap: 18px;
 }
 
 .gallery-grid figure {
   break-inside: avoid;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   position: relative;
   overflow: hidden;
-  border: 1px solid transparent;
+  border: 1px solid rgba(201, 162, 39, 0.18);
+  background: #0f0f0f;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.gallery-grid figure:hover {
+  border-color: var(--gold);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.7);
 }
 
 .gallery-grid img {
   width: 100%;
   height: auto;
-  filter: grayscale(30%) contrast(1.08);
-  transition: 0.45s;
+  display: block;
+  filter: grayscale(20%) contrast(1.06);
+  transition: filter 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .gallery-grid figure:hover img {
   filter: grayscale(0%);
-  transform: scale(1.03);
+  transform: scale(1.04);
 }
 
 .gallery-grid figcaption {
   position: absolute;
-  inset: auto 12px 12px 12px;
+  inset: auto 0 0 0;
+  padding: 28px 16px 14px;
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--gold);
+  background: linear-gradient(0deg, rgba(7, 7, 7, 0.95) 0%, rgba(7, 7, 7, 0.6) 70%, transparent 100%);
   opacity: 0;
-  transition: 0.3s;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .gallery-grid figure:hover figcaption {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .reviews {
@@ -852,8 +945,8 @@ footer {
 
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  animation: rise 0.9s ease forwards;
+  transform: translateY(24px);
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes rise {
@@ -861,6 +954,37 @@ footer {
     opacity: 1;
     transform: none;
   }
+}
+
+/* Scroll reveal system */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll img {
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 0.9s ease, transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.45s ease;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card.reveal-on-scroll:hover {
+  transform: translateY(-6px);
+}
+
+.reveal-on-scroll.is-revealed img {
+  opacity: 1;
+  transform: scale(1);
 }
 
 @media (max-width: 980px) {
@@ -888,10 +1012,15 @@ footer {
 
   .about,
   .service-grid,
+  .team-grid,
   .review-grid,
   .booking-wrap,
   .contact-grid {
     grid-template-columns: 1fr;
+  }
+
+  .team-card .team-img-wrap {
+    height: 380px;
   }
 
   .gallery-grid {
@@ -914,6 +1043,10 @@ footer {
 @media (max-width: 640px) {
   .gallery-grid {
     columns: 1;
+  }
+
+  .team-card .team-img-wrap {
+    height: 320px;
   }
 
   .stats {
